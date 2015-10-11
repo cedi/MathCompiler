@@ -15,6 +15,7 @@ set(SOURCE_FILES
         cpp/Operator/AbstractUnaryOperator.cpp
         cpp/OperatorFactory.cpp
         cpp/MathCompiler.cpp
+        cpp/MathematicString.cpp
 )
 
 add_executable(MathCompiler ${SOURCE_FILES})
