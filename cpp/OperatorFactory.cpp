@@ -9,6 +9,7 @@
 #include "../include/Operator/OperatorMultiplication.h"
 #include "../include/Operator/OperatorPlus.h"
 
+using namespace std;
 using namespace MathCompiler;
 
 OperatorFactory OperatorFactory::instance;
@@ -47,4 +48,74 @@ Operator::IOperator* OperatorFactory::getOperator(const char* op)
 void OperatorFactory::addOperator(Operator::IOperator* op)
 {
 	operatorMap[op->getOperatorString()] = op;
+}
+
+//
+// Get all registred Operators
+//
+vector<const char*> OperatorFactory::getOperatorsList() const
+{
+	vector<const char*> vec;
+
+	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	{
+		vec.push_back(it->first);
+	}
+
+	return vec;
+}
+
+vector<const char*> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority) const
+{
+	vector<const char*> vec;
+
+	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	{
+		if(it->second->getPriority() == priority) {
+			vec.push_back(it->first);
+		}
+	}
+
+	return vec;
+}
+
+vector<const char*> OperatorFactory::getOperatorsList(CalculationDirectionEnum direction) const
+{
+	vector<const char*> vec;
+
+	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	{
+		if(it->second->getDirectionEnum() == direction) {
+			vec.push_back(it->first);
+		}
+	}
+
+	return vec;
+}
+
+vector<const char*> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority, CalculationDirectionEnum direction) const
+{
+	vector<const char*> vec;
+
+	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	{
+		if(it->second->getPriority() == priority && it->second->getDirectionEnum() == direction) {
+			vec.push_back(it->first);
+		}
+	}
+
+	return vec;
+}
+
+set<OperatorPriorityEnum> OperatorFactory::getPriorityList() const
+{
+	set<OperatorPriorityEnum> set1;
+	vector<OperatorPriorityEnum> vec;
+
+	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	{
+		set1.insert(it->second->getPriority());
+	}
+
+	return set1;
 }

@@ -4,6 +4,8 @@
 
 #include "Operator/IOperator.h"
 #include <map>
+#include <set>
+#include <vector>
 
 #ifndef MATHCOMPILER_OPERATORFACTORY_H
 #define MATHCOMPILER_OPERATORFACTORY_H
@@ -22,6 +24,12 @@ namespace MathCompiler
 	public:
 		Operator::IOperator* getOperator(const char* op);
 		void addOperator(Operator::IOperator* op);
+
+		std::vector<const char*> getOperatorsList() const;
+		std::vector<const char*> getOperatorsList(OperatorPriorityEnum priority) const;
+		std::vector<const char*> getOperatorsList(CalculationDirectionEnum direction) const;
+		std::vector<const char*> getOperatorsList(OperatorPriorityEnum priority, CalculationDirectionEnum direction) const;
+		std::set<OperatorPriorityEnum> getPriorityList() const;
 
 	private:
 		std::map<const char*, Operator::IOperator*> operatorMap;
