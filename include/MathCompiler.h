@@ -3,18 +3,25 @@
 //
 
 #include <string>
+#include "../include/OperatorEnum.h"
 
 #ifndef MATHCOMPILER_MATHCOMPILER_H
 #define MATHCOMPILER_MATHCOMPILER_H
 
-class MathCompiler
+namespace MathCompiler
 {
-public:
-	const char* compile(const char* expression);
+	class MathematicString;
 
-private:
-	void compileBrackets(std::string* expression);
-};
+	class Compiler
+	{
+	public:
+		const char* compile(const char* expression);
 
+	private:
+		void compileBrackets(std::string* expression);
+
+		void compileSingleOperation(CalculationDirectionEnum direction, MathematicString* expression);
+	};
+}
 
 #endif //MATHCOMPILER_MATHCOMPILER_H
