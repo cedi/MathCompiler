@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	MathCompiler compiler;
+	MathCompiler::Compiler compiler;
 
 	cout << compiler.compile("1+1") << endl;
 	cout << compiler.compile("2-2") << endl;
