@@ -95,10 +95,7 @@ void Compiler::compileSingleOperation(CalculationDirectionEnum direction, Mathem
 
 			while(expression->find(op) > -1)
 			{
-<<<<<<< HEAD
-=======
-// todo/ck/no direction enum and string needed. Operator contains direction and string. 
->>>>>>> master
+				// todo/ck/no direction enum and string needed. Operator contains direction and string.
 				pair<int, int> ret = expression->getOperatorIdxFromStr(direction, op);
 				int index = ret.first;
 				int length = ret.second;
