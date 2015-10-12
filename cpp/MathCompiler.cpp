@@ -2,6 +2,7 @@
 // Created by Cedric Kienzler on 11.10.15.
 //
 
+#include <algorithm>
 #include "../include/MathCompiler.h"
 #include "../include/MathematicString.h"
 #include "../include/OperatorFactory.h"
@@ -61,7 +62,7 @@ void Compiler::compileBrackets(string* expression)
 		idxClosingBracket = expression->rfind(")");
 		idxOpeningBracket = expression->rfind("(", idxClosingBracket);
 
-		if(idxOpeningBracket <= -1 || idxClosingBracket <= -1)
+		if(idxOpeningBracket == string::npos || idxClosingBracket == string::npos)
 			break;
 
 		// calculate the length between
@@ -79,7 +80,7 @@ void Compiler::compileBrackets(string* expression)
 		// Replace it in the string
 		*expression = expression->replace(idxOpeningBracket, lenBrackets, compiled.c_str());
 	}
-	while(idxOpeningBracket > -1 && idxClosingBracket > -1);
+	while(idxOpeningBracket != string::npos && idxClosingBracket != string::npos);
 }
 
 //
@@ -93,17 +94,17 @@ void Compiler::compileSingleOperation(CalculationDirectionEnum direction, Mathem
 		{
 			Operator::IOperator* anOperator = OperatorFactory::getInstance().getOperator(op);
 
-			while(expression->find(op) > -1)
+			while(expression->find(anOperator->getOperatorString()) != string::npos)
 			{
-				// todo/ck/no direction enum and string needed. Operator contains direction and string.
-				pair<int, int> ret = expression->getOperatorIdxFromStr(direction, op);
+				pair<int, int> ret = expression->getOperatorIdxFromStr(anOperator);
 				int index = ret.first;
 				int length = ret.second;
 
 				MathematicString subExpr = expression->getSubExpression(*anOperator, index, length);
-				MathematicString subExprOld = subExpr;
+				MathematicString subExprOld(subExpr);
 
 				subExpr = anOperator->compile(subExpr.c_str());
+
 				expression->replaceAll(subExprOld.c_str(), subExpr.c_str());
 			}
 		}

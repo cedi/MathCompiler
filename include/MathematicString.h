@@ -4,6 +4,12 @@
 
 #include <string>
 #include <vector>
+#include <stdlib.h>
+#include <iostream>
+#include <algorithm>
+#include <functional>
+#include <cctype>
+#include <locale>
 #include "OperatorEnum.h"
 #include "Operator/IOperator.h"
 
@@ -16,20 +22,27 @@ namespace MathCompiler
 	{
 	public:
 		MathematicString(const char* str);
+
 		MathematicString(std::string str);
+
 		MathematicString(MathematicString& str);
 
 	public:
-		bool       normalize(bool toInternal = true);
-		bool       isContainingOperator() const;
-		bool       findOneOf(const std::vector<std::string>& toFind) const;
+		bool normalize(bool toInternal = true);
+
+		bool isContainingOperator() const;
+
+		bool findOneOf(const std::vector<std::string>& toFind) const;
 
 	public:
-		std::string str() const { return static_cast<std::string>(*this); }
-		const char* c_str()	const { return static_cast<std::string>(*this).c_str(); }
+		std::string str() const
+		{ return static_cast<std::string>(*this); }
+
 		std::string& replaceAll(const char* oldStr, const char* newStr);
-		std::tuple<int, int> getOperatorIdxFromStr(CalculationDirectionEnum direction, const char* op) const;
-		MathematicString getSubExpression(const Operator::IOperator& op, int index, int length);
+
+		std::tuple<int, int> getOperatorIdxFromStr(const Operator::IOperator* op) const;
+
+		MathematicString getSubExpression(const Operator::IOperator& op, size_t index, size_t length);
 	};
 }
 
