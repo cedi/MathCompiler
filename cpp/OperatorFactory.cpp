@@ -8,6 +8,7 @@
 #include "../include/Operator/OperatorMinus.h"
 #include "../include/Operator/OperatorMultiplication.h"
 #include "../include/Operator/OperatorPlus.h"
+#include "../include/Operator/OperatorRoot.h"
 
 using namespace std;
 using namespace MathCompiler;
@@ -24,6 +25,7 @@ OperatorFactory::OperatorFactory()
 	addOperator(static_cast<Operator::IOperator*>(new Operator::OperatorPlus()));
 	addOperator(static_cast<Operator::IOperator*>(new Operator::OperatorMinus()));
 	addOperator(static_cast<Operator::IOperator*>(new Operator::OperatorExponent()));
+	addOperator(static_cast<Operator::IOperator*>(new Operator::OperatorRoot()));
 }
 
 //
