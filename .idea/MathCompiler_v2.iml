@@ -13,6 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/cpp/Operator/OperatorMinus.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cpp/Operator/OperatorMultiplication.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cpp/Operator/OperatorPlus.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cpp/Operator/OperatorRoot.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cpp/OperatorFactory.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
     </content>
