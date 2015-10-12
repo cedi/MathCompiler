@@ -12,7 +12,7 @@ using namespace MathCompiler::Operator;
 // Constructor
 //
 OperatorMinus::OperatorMinus()
-		: AbstractBinaryOperator(OperatorPriorityEnum::DotOperator, CalculationDirectionEnum::Forward, "-")
+		: AbstractBinaryOperator(OperatorPriorityEnum::LineOperator, CalculationDirectionEnum::Forward, "-")
 { }
 
 //
