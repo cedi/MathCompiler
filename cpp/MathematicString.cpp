@@ -138,8 +138,21 @@ MathematicString MathematicString::getSubExpression(const Operator::IOperator& o
 	for(auto item : operatorList)
 	{
 		size_t idx = rfind(item, index -1);
-		if(idx != string::npos && idx > idxBeforeOp && idx < idxAfterOp)
-			idxBeforeOp = idx;
+		if(idxAfterOp != 0)
+		{
+			if(idx != string::npos && idx > idxBeforeOp && idx < idxAfterOp)
+			{
+				idxBeforeOp = idx;
+			}
+		}
+		else
+		{
+			if(idx != string::npos && idx > idxBeforeOp)
+			{
+				idxBeforeOp = idx;
+			}
+		}
+
 	}
 
 	if(idxAfterOp == 0 && idxBeforeOp == 0)
