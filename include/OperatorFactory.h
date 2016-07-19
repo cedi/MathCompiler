@@ -32,7 +32,7 @@ namespace MathCompiler
 		std::set<OperatorPriorityEnum> getPriorityList() const;
 
 	private:
-		std::map<const char*, Operator::IOperator*> operatorMap;
+		std::map<std::string, Operator::IOperator*> operatorMap;
 	};
 }
 #endif //MATHCOMPILER_OPERATORFACTORY_H

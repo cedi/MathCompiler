@@ -33,5 +33,5 @@ string AbstractBinaryOperator::compile(const string& expression)
 
 	stringstream ss;
 	ss << result;
-	return ss.str().c_str();
+	return ss.str();
 }

@@ -21,5 +21,5 @@ OperatorRoot::OperatorRoot()
 //
 double OperatorRoot::compile(double left, double right)
 {
-	return pow(left, 1/right);
+	return pow(right, 1.0 / left);
 }

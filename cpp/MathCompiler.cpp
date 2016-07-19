@@ -88,24 +88,23 @@ void Compiler::compileBrackets(string* expression)
 //
 void Compiler::compileSingleOperation(CalculationDirectionEnum direction, MathematicString* expression)
 {
-	for(OperatorPriorityEnum priority : OperatorFactory::getInstance().getPriorityList())
+	for(auto priority : OperatorFactory::getInstance().getPriorityList())
 	{
 		for(auto op : OperatorFactory::getInstance().getOperatorsList(priority, direction))
 		{
 			Operator::IOperator* anOperator = OperatorFactory::getInstance().getOperator(op);
 
-			while(expression->find(anOperator->getOperatorString()) != string::npos)
+			while(anOperator && expression->find(anOperator->getOperatorString()) != string::npos)
 			{
 				pair<int, int> ret = expression->getOperatorIdxFromStr(anOperator);
 				int index = ret.first;
 				int length = ret.second;
 
 				MathematicString subExpr = expression->getSubExpression(*anOperator, index, length);
-				MathematicString subExprOld(subExpr);
 
-				subExpr = anOperator->compile(subExpr.c_str());
+				string result = anOperator->compile(subExpr);
 
-				expression->replaceAll(subExprOld.c_str(), subExpr.c_str());
+				expression->replaceAll(subExpr, result);
 			}
 		}
 	}

@@ -41,7 +41,7 @@ OperatorFactory& OperatorFactory::getInstance()
 //
 Operator::IOperator* OperatorFactory::getOperator(const string& op)
 {
-	return operatorMap[op.c_str()];
+	return operatorMap[op];
 }
 
 //
@@ -49,7 +49,7 @@ Operator::IOperator* OperatorFactory::getOperator(const string& op)
 //
 void OperatorFactory::addOperator(Operator::IOperator* op)
 {
-	operatorMap[op->getOperatorString().c_str()] = op;
+	operatorMap[op->getOperatorString()] = op;
 }
 
 //
@@ -59,9 +59,9 @@ vector<string> OperatorFactory::getOperatorsList() const
 {
 	vector<string> vec;
 
-	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
+	for(auto it : operatorMap)
 	{
-		vec.push_back(it->first);
+		vec.push_back(it.second->getOperatorString());
 	}
 
 	return vec;
@@ -111,13 +111,12 @@ vector<string> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority, 
 
 set<OperatorPriorityEnum> OperatorFactory::getPriorityList() const
 {
-	set<OperatorPriorityEnum> set1;
-	vector<OperatorPriorityEnum> vec;
+	set<OperatorPriorityEnum> set;
 
 	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
 	{
-		set1.insert(it->second->getPriority());
+		set.insert(it->second->getPriority());
 	}
 
-	return set1;
+	return set;
 }

@@ -23,13 +23,13 @@ MathematicString::MathematicString(MathematicString& str)
 //
 // Replace all occurrences
 //
-string& MathematicString::replaceAll(const char* oldStr, const char* newStr)
+string& MathematicString::replaceAll(const string& oldStr, const string& newStr)
 {
 	size_t start_pos = 0;
 	while((start_pos = this->find(oldStr, start_pos)) != std::string::npos)
 	{
-		this->replace(start_pos, strlen(oldStr), newStr);
-		start_pos += strlen(newStr);
+		this->replace(start_pos, oldStr.length(), newStr);
+		start_pos += newStr.length();
 	}
 
 	return *this;
@@ -76,8 +76,7 @@ bool MathematicString::normalize(bool toInternal)
 //
 bool MathematicString::isContainingOperator() const
 {
-	// Convert all other negative signs
-	for(const auto& op : OperatorFactory::getInstance().getOperatorsList()) {
+	for(auto op : OperatorFactory::getInstance().getOperatorsList()) {
 		if(string::npos != find(op)) {
 			return true;
 		}
@@ -190,6 +189,12 @@ MathematicString MathematicString::getSubExpression(const Operator::IOperator& o
 		{
 			return *this;
 		}
+	}
+
+	// Idx after op not found - so it is the last operator
+	if(idxAfterOp == 0 &&  idxAfterOp < idxBeforeOp)
+	{
+		idxAfterOp = this->length();
 	}
 
 	size_t len = idxAfterOp - idxBeforeOp;

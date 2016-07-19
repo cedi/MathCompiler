@@ -35,7 +35,7 @@ namespace MathCompiler
 
 	public:
 		std::string str() const { return static_cast<std::string>(*this); }
-		std::string& replaceAll(const char* oldStr, const char* newStr);
+		std::string& replaceAll(const std::string& oldStr, const std::string& newStr);
 		std::pair<int, int> getOperatorIdxFromStr(const Operator::IOperator* op) const;
 		MathematicString getSubExpression(const Operator::IOperator& op, size_t index, size_t length);
 	};
