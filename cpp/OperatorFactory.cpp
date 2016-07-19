@@ -39,9 +39,9 @@ OperatorFactory& OperatorFactory::getInstance()
 //
 // get the Operator
 //
-Operator::IOperator* OperatorFactory::getOperator(const char* op)
+Operator::IOperator* OperatorFactory::getOperator(const string& op)
 {
-	return operatorMap[op];
+	return operatorMap[op.c_str()];
 }
 
 //
@@ -49,17 +49,17 @@ Operator::IOperator* OperatorFactory::getOperator(const char* op)
 //
 void OperatorFactory::addOperator(Operator::IOperator* op)
 {
-	operatorMap[op->getOperatorString()] = op;
+	operatorMap[op->getOperatorString().c_str()] = op;
 }
 
 //
 // Get all registred Operators
 //
-vector<const char*> OperatorFactory::getOperatorsList() const
+vector<string> OperatorFactory::getOperatorsList() const
 {
-	vector<const char*> vec;
+	vector<string> vec;
 
-	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
 	{
 		vec.push_back(it->first);
 	}
@@ -67,11 +67,11 @@ vector<const char*> OperatorFactory::getOperatorsList() const
 	return vec;
 }
 
-vector<const char*> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority) const
+vector<string> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority) const
 {
-	vector<const char*> vec;
+	vector<string> vec;
 
-	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
 	{
 		if(it->second->getPriority() == priority) {
 			vec.push_back(it->first);
@@ -81,11 +81,11 @@ vector<const char*> OperatorFactory::getOperatorsList(OperatorPriorityEnum prior
 	return vec;
 }
 
-vector<const char*> OperatorFactory::getOperatorsList(CalculationDirectionEnum direction) const
+vector<string> OperatorFactory::getOperatorsList(CalculationDirectionEnum direction) const
 {
-	vector<const char*> vec;
+	vector<string> vec;
 
-	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
 	{
 		if(it->second->getDirectionEnum() == direction) {
 			vec.push_back(it->first);
@@ -95,11 +95,11 @@ vector<const char*> OperatorFactory::getOperatorsList(CalculationDirectionEnum d
 	return vec;
 }
 
-vector<const char*> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority, CalculationDirectionEnum direction) const
+vector<string> OperatorFactory::getOperatorsList(OperatorPriorityEnum priority, CalculationDirectionEnum direction) const
 {
-	vector<const char*> vec;
+	vector<string> vec;
 
-	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
 	{
 		if(it->second->getPriority() == priority && it->second->getDirectionEnum() == direction) {
 			vec.push_back(it->first);
@@ -114,7 +114,7 @@ set<OperatorPriorityEnum> OperatorFactory::getPriorityList() const
 	set<OperatorPriorityEnum> set1;
 	vector<OperatorPriorityEnum> vec;
 
-	for(map<const char*, MathCompiler::Operator::IOperator*>::const_iterator it = operatorMap.begin(); it != operatorMap.end(); it++)
+	for(auto it = operatorMap.begin(); it != operatorMap.end(); it++)
 	{
 		set1.insert(it->second->getPriority());
 	}

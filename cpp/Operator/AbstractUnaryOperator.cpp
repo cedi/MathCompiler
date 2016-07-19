@@ -13,7 +13,7 @@ using namespace MathCompiler::Operator;
 
 AbstractUnaryOperator::AbstractUnaryOperator(OperatorPriorityEnum priorityEnum
 											 , CalculationDirectionEnum directionEnum
-											 , const char* operatorStr
+											 , const string& operatorStr
 											 , bool operatorRightOfNumber
 											)
 		: AbstractOperator(priorityEnum, directionEnum, operatorStr)
@@ -23,26 +23,25 @@ AbstractUnaryOperator::AbstractUnaryOperator(OperatorPriorityEnum priorityEnum
 //
 // Compile
 //
-const char* AbstractUnaryOperator::compile(const char* expression)
+string AbstractUnaryOperator::compile(const string& expression)
 {
-	string mathExpression(expression);
-	unsigned long operatorIdx = mathExpression.find(getOperatorString());
-	unsigned long operatorLen = strlen(getOperatorString());
+	unsigned long operatorIdx = expression.find(getOperatorString());
+	unsigned long operatorLen = getOperatorString().length();
 
 	double number = 0;
 
 	if(operatorRightOfNumber)
 	{
-		number = atof(mathExpression.substr(operatorIdx + operatorLen, string::npos).c_str());
+		number = atof(expression.substr(operatorIdx + operatorLen, string::npos).c_str());
 	}
 	else
 	{
-		number = atof(mathExpression.substr(0, operatorIdx).c_str());
+		number = atof(expression.substr(0, operatorIdx).c_str());
 	}
 
 	double result = compile(number);
 
 	stringstream ss;
 	ss << result;
-	return ss.str().c_str();
+	return ss.str();
 }

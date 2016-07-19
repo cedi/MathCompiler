@@ -6,11 +6,12 @@
 #include "../../include/Operator/AbstractOperator.h"
 #include <string>
 
+using namespace std;
 using namespace MathCompiler::Operator;
 
 AbstractOperator::AbstractOperator(OperatorPriorityEnum priorityEnum
 								   , CalculationDirectionEnum directionEnum
-								   , const char* operatorStr
+								   , const string& operatorStr
 								  )
 		: priorityEnum(priorityEnum)
 		  , directionEnum(directionEnum)

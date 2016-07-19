@@ -15,7 +15,7 @@ namespace MathCompiler
 	class Compiler
 	{
 	public:
-		const char* compile(const char* expression);
+		std::string compile(const std::string& expression);
 
 	private:
 		void compileBrackets(std::string* expression);

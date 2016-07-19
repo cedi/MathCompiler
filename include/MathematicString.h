@@ -22,26 +22,21 @@ namespace MathCompiler
 	{
 	public:
 		MathematicString(const char* str);
-
 		MathematicString(std::string str);
-
 		MathematicString(MathematicString& str);
 
 	public:
 		bool normalize(bool toInternal = true);
-
 		bool isContainingOperator() const;
-
 		bool findOneOf(const std::vector<std::string>& toFind) const;
 
 	public:
-		std::string str() const
-		{ return static_cast<std::string>(*this); }
+		size_t count(const std::string& substr);
 
+	public:
+		std::string str() const { return static_cast<std::string>(*this); }
 		std::string& replaceAll(const char* oldStr, const char* newStr);
-
 		std::pair<int, int> getOperatorIdxFromStr(const Operator::IOperator* op) const;
-
 		MathematicString getSubExpression(const Operator::IOperator& op, size_t index, size_t length);
 	};
 }

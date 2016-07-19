@@ -55,10 +55,10 @@ bool MathematicString::normalize(bool toInternal)
 		// Convert all other negative signs
 		for(const auto& op : OperatorFactory::getInstance().getOperatorsList()) {
 			char bufExternal[10];
-			sprintf_s(bufExternal, "%s-", op);
+			sprintf_s(bufExternal, "%s-", op.c_str());
 
 			char bufInternal[10];
-			sprintf_s(bufInternal, "%s_", op);
+			sprintf_s(bufInternal, "%s_", op.c_str());
 
 			replaceAll(bufExternal, bufInternal);
 		}
@@ -114,9 +114,31 @@ pair<int, int> MathematicString::getOperatorIdxFromStr(const Operator::IOperator
 		index = static_cast<int>(rfind(op->getOperatorString()));
 	}
 
-	int length = static_cast<int>(strlen(op->getOperatorString()));
+	int length = static_cast<int>(strlen(op->getOperatorString().c_str()));
 
 	return pair<int, int>(index, length);
+}
+
+// 
+// Count the occurrences of a a substring
+// 
+size_t MathematicString::count(const std::string& substr)
+{
+	if(substr.length() == 0)
+	{
+		return 0;
+	}
+
+	int count = 0;
+	for(size_t offset = this->find(substr)
+		; offset != std::string::npos
+		; offset = this->find(substr, offset + substr.length())
+		)
+	{
+		count++;
+	}
+
+	return count;
 }
 
 //
@@ -124,7 +146,7 @@ pair<int, int> MathematicString::getOperatorIdxFromStr(const Operator::IOperator
 //
 MathematicString MathematicString::getSubExpression(const Operator::IOperator& op, size_t index, size_t length)
 {
-	vector<const char*> operatorList = OperatorFactory::getInstance().getOperatorsList();
+	auto operatorList = OperatorFactory::getInstance().getOperatorsList();
 	size_t idxAfterOp = 0;
 	size_t idxBeforeOp = 0;
 
@@ -157,14 +179,14 @@ MathematicString MathematicString::getSubExpression(const Operator::IOperator& o
 
 	if(idxAfterOp == 0 && idxBeforeOp == 0)
 	{
-		size_t count = 0;
+		size_t cntr = 0;
 
 		for(auto item : operatorList)
 		{
-			count += std::count(this->begin(), this->end(), *item);
+			cntr += count(item);
 		}
 
-		if(count == 1)
+		if(cntr == 1)
 		{
 			return *this;
 		}

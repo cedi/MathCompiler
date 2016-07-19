@@ -13,7 +13,7 @@ using namespace MathCompiler;
 //
 // Compile the string
 //
-const char* Compiler::compile(const char* expression)
+string Compiler::compile(const string& expression)
 {
 	try
 	{
@@ -90,7 +90,7 @@ void Compiler::compileSingleOperation(CalculationDirectionEnum direction, Mathem
 {
 	for(OperatorPriorityEnum priority : OperatorFactory::getInstance().getPriorityList())
 	{
-		for(const char* op : OperatorFactory::getInstance().getOperatorsList(priority, direction))
+		for(auto op : OperatorFactory::getInstance().getOperatorsList(priority, direction))
 		{
 			Operator::IOperator* anOperator = OperatorFactory::getInstance().getOperator(op);
 

@@ -3,6 +3,7 @@
 //
 
 #include "AbstractOperator.h"
+#include <string>
 
 #ifndef MATHCOMPILER_V2_BINARYOPERATOR_H
 #define MATHCOMPILER_V2_BINARYOPERATOR_H
@@ -16,11 +17,11 @@ namespace MathCompiler
 		public:
 			AbstractBinaryOperator(OperatorPriorityEnum priorityEnum
 								   , CalculationDirectionEnum directionEnum
-								   , const char* operatorStr
+								   , const std::string& operatorStr
 								  );
 
 		public:
-			virtual const char* compile(const char* expression);
+			virtual std::string compile(const std::string& expression);
 
 		protected:
 			virtual double compile(double left, double right) = 0;

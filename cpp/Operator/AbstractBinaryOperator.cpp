@@ -13,7 +13,7 @@ using namespace MathCompiler::Operator;
 
 AbstractBinaryOperator::AbstractBinaryOperator(OperatorPriorityEnum priorityEnum
 											   , CalculationDirectionEnum directionEnum
-											   , const char* operatorStr
+											   , const string& operatorStr
 											  )
 		: AbstractOperator(priorityEnum, directionEnum, operatorStr)
 { }
@@ -21,14 +21,13 @@ AbstractBinaryOperator::AbstractBinaryOperator(OperatorPriorityEnum priorityEnum
 //
 // Compile
 //
-const char* AbstractBinaryOperator::compile(const char* expression)
+string AbstractBinaryOperator::compile(const string& expression)
 {
-	string mathExpression(expression);
-	unsigned long operatorIdx = mathExpression.find(getOperatorString());
-	unsigned long operatorLen = strlen(getOperatorString());
+	unsigned long operatorIdx = expression.find(getOperatorString());
+	unsigned long operatorLen = getOperatorString().length();
 
-	double left = atof(mathExpression.substr(0, operatorIdx).c_str());
-	double right = atof(mathExpression.substr(operatorIdx + operatorLen, string::npos).c_str());
+	double left = atof(expression.substr(0, operatorIdx).c_str());
+	double right = atof(expression.substr(operatorIdx + operatorLen, string::npos).c_str());
 
 	double result = compile(left, right);
 

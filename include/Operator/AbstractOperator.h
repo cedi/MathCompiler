@@ -17,18 +17,18 @@ namespace MathCompiler
 		public:
 			AbstractOperator(OperatorPriorityEnum priorityEnum
 							 , CalculationDirectionEnum directionEnum
-							 , const char* operatorStr
+							 , const std::string& operatorStr
 							);
 
 		public:
-			OperatorPriorityEnum     getPriority() const { return priorityEnum; }
+			OperatorPriorityEnum getPriority() const { return priorityEnum; }
 			CalculationDirectionEnum getDirectionEnum() const { return directionEnum; }
-			const char*              getOperatorString() const { return operatorString; }
+			std::string getOperatorString() const { return operatorString; }
 
 		private:
-			OperatorPriorityEnum     priorityEnum;
+			OperatorPriorityEnum priorityEnum;
 			CalculationDirectionEnum directionEnum;
-			const char*              operatorString;
+			std::string operatorString;
 		};
 	}
 }

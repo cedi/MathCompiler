@@ -3,6 +3,7 @@
 //
 
 #include "../OperatorEnum.h"
+#include <string>
 
 #ifndef MATHCOMPILER_V2_IOPERATOR_H
 #define MATHCOMPILER_V2_IOPERATOR_H
@@ -13,10 +14,10 @@ namespace MathCompiler
 	{
 		struct IOperator
 		{
-			virtual const char* compile(const char* expression) = 0;
-			virtual OperatorPriorityEnum     getPriority() const = 0;
+			virtual std::string compile(const std::string& expression) = 0;
+			virtual OperatorPriorityEnum getPriority() const = 0;
 			virtual CalculationDirectionEnum getDirectionEnum() const = 0;
-			virtual const char*              getOperatorString() const = 0;
+			virtual std::string getOperatorString() const = 0;
 		};
 	}
 }

@@ -22,13 +22,13 @@ namespace MathCompiler
 		static OperatorFactory& getInstance();
 
 	public:
-		Operator::IOperator* getOperator(const char* op);
+		Operator::IOperator* getOperator(const std::string& op);
 		void addOperator(Operator::IOperator* op);
 
-		std::vector<const char*> getOperatorsList() const;
-		std::vector<const char*> getOperatorsList(OperatorPriorityEnum priority) const;
-		std::vector<const char*> getOperatorsList(CalculationDirectionEnum direction) const;
-		std::vector<const char*> getOperatorsList(OperatorPriorityEnum priority, CalculationDirectionEnum direction) const;
+		std::vector<std::string> getOperatorsList() const;
+		std::vector<std::string> getOperatorsList(OperatorPriorityEnum priority) const;
+		std::vector<std::string> getOperatorsList(CalculationDirectionEnum direction) const;
+		std::vector<std::string> getOperatorsList(OperatorPriorityEnum priority, CalculationDirectionEnum direction) const;
 		std::set<OperatorPriorityEnum> getPriorityList() const;
 
 	private:
