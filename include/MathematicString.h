@@ -40,7 +40,7 @@ namespace MathCompiler
 
 		std::string& replaceAll(const char* oldStr, const char* newStr);
 
-		std::tuple<int, int> getOperatorIdxFromStr(const Operator::IOperator* op) const;
+		std::pair<int, int> getOperatorIdxFromStr(const Operator::IOperator* op) const;
 
 		MathematicString getSubExpression(const Operator::IOperator& op, size_t index, size_t length);
 	};

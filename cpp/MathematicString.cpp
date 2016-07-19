@@ -55,10 +55,10 @@ bool MathematicString::normalize(bool toInternal)
 		// Convert all other negative signs
 		for(const auto& op : OperatorFactory::getInstance().getOperatorsList()) {
 			char bufExternal[10];
-			sprintf(bufExternal, "%s-", op);
+			sprintf_s(bufExternal, "%s-", op);
 
 			char bufInternal[10];
-			sprintf(bufInternal, "%s_", op);
+			sprintf_s(bufInternal, "%s_", op);
 
 			replaceAll(bufExternal, bufInternal);
 		}
@@ -103,7 +103,7 @@ bool MathematicString::findOneOf(const vector<string>& toFind) const
 //
 // Get the first sub expression from an given operator list with a given direction
 //
-tuple<int, int> MathematicString::getOperatorIdxFromStr(const Operator::IOperator* op) const
+pair<int, int> MathematicString::getOperatorIdxFromStr(const Operator::IOperator* op) const
 {
 	int index = -1;
 
