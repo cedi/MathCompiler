@@ -22,31 +22,34 @@ You could inerhit from AbstractOperator or IOperator to provide your own Operato
 
 ## Example: Add support for root
 1. Create a new class, called OperatorRoot, which inerits from AbstractUnaryOperator, put it in the Namespace MathCompiler::Operator and implement the compile-method:
-    <code>
+
+<code>
     namespace MathCompiler
     {
-    	namespace Operator
-    	{
-    		class OperatorRoot : public AbstractBinaryOperator
-    		{
-    		public:
-    			OperatorRoot();
-    
-    		protected:
-    			virtual double compile(double left, double right);
-    		};
-    	}
+    namespace Operator
+    {
+        class OperatorRoot : public AbstractBinaryOperator
+        {
+        public:
+            OperatorRoot();
+        protected:
+            virtual double compile(double left, double right);
+        };
     }
-    </code>
+    }
+</code>
+
 2. Implement the constructor to match your requirements:
     OperatorRoot::OperatorRoot()
     		: AbstractBinaryOperator(OperatorPriorityEnum::Function, CalculationDirectionEnum::Forward, "root")
     { }
 
 3. Implement the compile-Function
+
+<code>
     double OperatorRoot::compile(double left, double right)
     {
     	return pow(right, 1.0 / left);
     }
-    
+</code>
     
